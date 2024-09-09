@@ -30,7 +30,7 @@ export default class LoginComponent {
       Nombre_Usuario: this.frm_login.controls['nombre_usuario'].value,
       Contrasenia: this.frm_login.controls['contrasenia'].value
     };
-    //console.log(usuario);
+    console.log(usuario);
     this.usuarioServicio.login(usuario);
     this.mensajeerror = this.paranetros.snapshot.paramMap.get('id');
     console.log(this.mensajeerror);

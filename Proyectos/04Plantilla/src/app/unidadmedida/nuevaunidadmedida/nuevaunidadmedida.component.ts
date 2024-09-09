@@ -29,7 +29,8 @@ export class NuevaunidadmedidaComponent implements OnInit {
       this.unidadService.uno(this.idUnidadMedida).subscribe((ununidadmedida) => {
         this.frm_UnidadMedida.controls['Detalle'].setValue(ununidadmedida.Detalle);
         this.frm_UnidadMedida.controls['Tipo'].setValue(ununidadmedida.Tipo);
-      })
+        this.titulo = 'Editar Unidad de Medida';
+      });
     }
     /*
     this.frm_UnidadMedida = new FormGroup({

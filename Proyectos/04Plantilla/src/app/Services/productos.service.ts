@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ProductoService {
-  apiurl = 'http://localhost/sexto/Proyectos/03MVC/controllers/productos.controller.php?op=';
+  apiurl = 'http://localhost/Tareas6to/TareaAppWeb6to5.2/Proyectos/03MVC/controllers/productos.controller.php?op=';
 
   constructor(private http: HttpClient) {}
 
