@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IUnidadMedida } from 'src/app/Interfaces/iunidadmedida';
 import { UnidadmedidaService } from '../../Services/unidadmedida.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -19,14 +19,23 @@ export class NuevaunidadmedidaComponent implements OnInit {
   idUnidadMedida = 0;
   constructor(
     private unidadService: UnidadmedidaService,
-    private navegacion: Router
+    private navegacion: Router,
+    private ruta: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    this.idUnidadMedida = parseInt(this.ruta.snapshot.paramMap.get('idUnidad_Medida'));
+    if (this.idUnidadMedida > 0){
+      this.unidadService.uno(this.idUnidadMedida).subscribe((ununidadmedida) => {
+        this.frm_UnidadMedida.controls['Detalle'].setValue(ununidadmedida.Detalle);
+        this.frm_UnidadMedida.controls['Tipo'].setValue(ununidadmedida.Tipo);
+      })
+    }
+    /*
     this.frm_UnidadMedida = new FormGroup({
       Detalle: new FormControl('', [Validators.required]),
       Tipo: new FormControl('', [Validators.required])
-    });
+    });*/
   }
 
   cambio(objetoSleect: any) {
