@@ -19,17 +19,14 @@
                 </thead>
                 <tbody>
                   @for (unidadmedida of listaunidades; track $index) {
-                    <tr>
-                      <td>{{ $index + 1 }}</td>
-                      <td>{{ unidadmedida.Detalle }}</td>
-                      <!--<td>{{ unidadmedida.Tipo == '0' ? 'Presentacion': unidadmedida.Tipo == 1 ? 'Unidad de Medida': 'Factor de Conversion' }}</td>-->
-                      @if (unidadmedida.Tipo == 0) {
-                        <td>Presentacion</td>
-                      } @else if (unidadmedida.Tipo == 1) {
-                        <td>Unidad de Medida</td>
-                      } @else {
-                        <td>Factor de Conversion</td>
-                      }
+                    <tr *ngFor="let unidadmedida of listaunidades; let i = index; trackBy: trackByFn">
+                      <td>{{ i + 1}}</td>
+                      <td>{{ unidadmedida.Detalle}}</td>
+
+                      <td>
+                        {{ unidadmedida.Tipo === 0 ? 'Presentacion' : unidadmedida.Tipo === 1 ? 'Unidad  de Medida' : 'Factor de Conversion'}}
+                      </td>
+
                       <td>
                         <button
                           type="button"
@@ -54,4 +51,6 @@
 </div>
 <!--
     LOS COMPONENTES (.TS) ESTAN OBLIGADOS A IMPORTAR LA REFERENCIA PARA QUE SE PUEDA USAR EN EL HTML
+
+    
     -->

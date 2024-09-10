@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TrackByFunction } from '@angular/core';
 import { IUnidadMedida } from '../Interfaces/iunidadmedida';
 import { RouterLink } from '@angular/router';
 import { SharedModule } from '../theme/shared/shared.module';
 import { UnidadmedidaService } from '../Services/unidadmedida.service';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-unidadmedida',
   standalone: true,
-  imports: [RouterLink, SharedModule, ReactiveFormsModule],
+  imports: [RouterLink, SharedModule, ReactiveFormsModule, CommonModule],
   templateUrl: './unidadmedida.component.html',
   styleUrl: './unidadmedida.component.scss'
 })
@@ -17,6 +18,7 @@ export class UnidadmedidaComponent implements OnInit {
 
   //Definir formGroup
   frm_UnidadMedida: FormGroup;
+  trackByFn: TrackByFunction<IUnidadMedida>;
 
   constructor(private unidadServicio: UnidadmedidaService) {}
   ngOnInit(): void {

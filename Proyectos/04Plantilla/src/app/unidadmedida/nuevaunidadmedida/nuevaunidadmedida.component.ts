@@ -4,11 +4,12 @@ import { IUnidadMedida } from 'src/app/Interfaces/iunidadmedida';
 import { UnidadmedidaService } from '../../Services/unidadmedida.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-nuevaunidadmedida',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule],
+  imports: [ReactiveFormsModule, FormsModule, CommonModule],
   templateUrl: './nuevaunidadmedida.component.html',
   styleUrl: './nuevaunidadmedida.component.scss'
 })
@@ -24,7 +25,36 @@ export class NuevaunidadmedidaComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.frm_UnidadMedida = new FormGroup({
+      Detalle: new FormControl('', [Validators.required]),
+
+      Tipo: new FormControl('', [Validators.required])
+    });
+    const idParam = this.ruta.snapshot.paramMap.get('idUnidad_Medida');
+    // Verifica si el parámetro es numérico
+
+    this.idUnidadMedida = idParam ? parseInt(idParam, 10) : 0;
+    if (this.idUnidadMedida > 0) {
+      this.unidadService.uno(this.idUnidadMedida).subscribe((ununidadmedida) => {
+        this.frm_UnidadMedida.patchValue({
+          Detalle: ununidadmedida.Detalle,
+
+          Tipo: ununidadmedida.Tipo
+        });
+
+        this.titulo = 'Editar Unidad de Medida';
+      });
+    }
+  }
+
+  /*ngOnInit(): void {
+    this.frm_UnidadMedida = new FormGroup({
+      Detalle: new FormControl('', [Validators.required]),
+      Tipo: new FormControl('', [Validators.required])
+    });
+    
     this.idUnidadMedida = parseInt(this.ruta.snapshot.paramMap.get('idUnidad_Medida'));
+    console.log(this.idUnidadMedida);
     if (this.idUnidadMedida > 0){
       this.unidadService.uno(this.idUnidadMedida).subscribe((ununidadmedida) => {
         this.frm_UnidadMedida.controls['Detalle'].setValue(ununidadmedida.Detalle);
@@ -32,12 +62,8 @@ export class NuevaunidadmedidaComponent implements OnInit {
         this.titulo = 'Editar Unidad de Medida';
       });
     }
-    /*
-    this.frm_UnidadMedida = new FormGroup({
-      Detalle: new FormControl('', [Validators.required]),
-      Tipo: new FormControl('', [Validators.required])
-    });*/
-  }
+    
+  }*/
 
   cambio(objetoSleect: any) {
     this.frm_UnidadMedida.get('Tipo')?.setValue(objetoSleect.target.value);
@@ -59,5 +85,9 @@ export class NuevaunidadmedidaComponent implements OnInit {
         this.navegacion.navigate(['/unidadmedida']);
       });
     }
+  }
+  // Función para trackBy en ngFor
+  trackByFn(index: number, item: IUnidadMedida) {
+    return item.idUnidad_Medida; // O cualquier otra propiedad única de los elementos
   }
 }

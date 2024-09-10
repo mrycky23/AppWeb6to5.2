@@ -7,34 +7,38 @@
     </div>
     <form [formGroup]="frm_UnidadMedida" (ngSubmit)="grabar()">
       <div class="row">
+        <!--Campo para detalle-->
         <div class="form-group mb-3">
-          <label class="form-label" for="Cedula">Detalle</label>
+          <label class="form-label">Detalle</label>
           <input formControlName="Detalle" type="text" class="form-control" id="Detalle" placeholder="Ingrese el Detalle" />
-          @if (frm_UnidadMedida.get('Detalle').invalid && frm_UnidadMedida.get('Detalle').touched) {
-            @if (frm_UnidadMedida.get('Detalle').hasError('required')) {
-              <div>
-                <small style="color: red">Los nombres son requeridos</small>
-              </div>
-            }
-          }
+
+          <!--Validacion del campo detalle-->
+          <div *ngIf="frm_UnidadMedida.get('Detalle')?.invalid && frm_UnidadMedida.get('Detalle')?.touched">
+            <small *ngIf="frm_UnidadMedida.get('Detalle')?.hasError('required')" style="color: red">
+              El detalle es requerido
+            </small>
+          </div>
+          
         </div>
+        <!--Campo para tipo-->
         <div class="form-group mb-3">
-          <label class="form-label" for="Nombres">Tipo</label>
-          <select class="form-control" (change)="cambio($event)">
-            <option>Seleccione una opcion</option>
+          <label class="form-label" for="Tipo">Tipo</label>
+          <select formControlName= "Tipo" class="form-control" id="Tipo">
+            <option value="" disabled>Seleccione una opcion</option>
             <option value="0">Presentacion</option>
             <option value="1">Unidad de Medida</option>
             <option value="2">Factor de Conversion</option>
           </select>
-          @if (frm_UnidadMedida.get('Tipo').invalid && frm_UnidadMedida.get('Tipo').touched) {
-            @if (frm_UnidadMedida.get('Tipo').hasError('required')) {
-              <div>
-                <small style="color: red">Los nombres son requeridos</small>
-              </div>
-            }
-          }
+
+          <!--Validacion del campo tipo-->
+          <div *ngIf="frm_UnidadMedida.get('Tipo')?.invalid && frm_UnidadMedida.get('Tipo')?.touched">
+            <small *ngIf="frm_UnidadMedida.get('Tipo')?.hasError('required')" style="color: red">
+              El tipo es requerido
+            </small>
+          </div>
         </div>
 
+        <!--Boton para enviar el formulario-->
         <div class="d-grid mt-3">
           <button type="submit" class="btn btn-primary" [disabled]="frm_UnidadMedida.invalid">Grabar</button>
         </div>

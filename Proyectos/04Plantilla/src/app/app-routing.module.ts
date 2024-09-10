@@ -89,7 +89,7 @@ const routes: Routes = [
         canActivate: [usuariosGuardGuard]
       },
       {
-        path: 'editarunidadmedida/:id',
+        path: 'editarunidadmedida/:idUnidad_Medida',
         loadComponent: () =>
           import('./unidadmedida/nuevaunidadmedida/nuevaunidadmedida.component').then((m) => m.NuevaunidadmedidaComponent),
         canActivate: [usuariosGuardGuard]
