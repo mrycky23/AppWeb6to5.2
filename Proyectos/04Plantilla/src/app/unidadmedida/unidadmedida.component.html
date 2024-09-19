@@ -18,7 +18,6 @@
                   </tr>
                 </thead>
                 <tbody>
-                  @for (unidadmedida of listaunidades; track $index) {
                     <tr *ngFor="let unidadmedida of listaunidades; let i = index; trackBy: trackByFn">
                       <td>{{ i + 1}}</td>
                       <td>{{ unidadmedida.Detalle}}</td>
@@ -38,7 +37,6 @@
                         </button>
                       </td>
                     </tr>
-                  }
                 </tbody>
               </table>
             </div>

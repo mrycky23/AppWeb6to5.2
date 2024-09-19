@@ -47,23 +47,7 @@ export class NuevaunidadmedidaComponent implements OnInit {
     }
   }
 
-  /*ngOnInit(): void {
-    this.frm_UnidadMedida = new FormGroup({
-      Detalle: new FormControl('', [Validators.required]),
-      Tipo: new FormControl('', [Validators.required])
-    });
-    
-    this.idUnidadMedida = parseInt(this.ruta.snapshot.paramMap.get('idUnidad_Medida'));
-    console.log(this.idUnidadMedida);
-    if (this.idUnidadMedida > 0){
-      this.unidadService.uno(this.idUnidadMedida).subscribe((ununidadmedida) => {
-        this.frm_UnidadMedida.controls['Detalle'].setValue(ununidadmedida.Detalle);
-        this.frm_UnidadMedida.controls['Tipo'].setValue(ununidadmedida.Tipo);
-        this.titulo = 'Editar Unidad de Medida';
-      });
-    }
-    
-  }*/
+
 
   cambio(objetoSleect: any) {
     this.frm_UnidadMedida.get('Tipo')?.setValue(objetoSleect.target.value);
